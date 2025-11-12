@@ -1,6 +1,6 @@
 {
     "name": "BMduinoKits",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A Microsoft MakeCode package for SmartHome and SmartAgriculture(BestModules)",
     "license": "MIT",
     "dependencies": {

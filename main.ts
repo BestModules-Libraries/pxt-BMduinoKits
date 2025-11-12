@@ -1463,8 +1463,8 @@ namespace 智慧家居 {
 //% block="智慧農業" color=#0fbc11 icon="\uf06c"
 namespace 智慧農業 {
     /**
-   * WiFi 模組積木
-   */
+     * WiFi 模組積木
+     */
     let isInitialized = false;
     /**
       * 讀取模組的回應
@@ -1505,9 +1505,9 @@ namespace 智慧農業 {
             let command1 = `AT+WMODE=3,0\r\n`;
             let command2 = `AT+WJAP=${ssid},${password}\r\n`;
 
-            serial.redirect(SerialPin.P1, SerialPin.P0, 115200); // 使用 P0 和 P1 作為 UART
+            serial.redirect(SerialPin.P0, SerialPin.P1, 115200); // 使用 P0 和 P1 作為 UART
 
-            //智慧農業.writeStringNewLine("Open your HOTSPOT!");
+            //智慧家居.writeStringNewLine("Open your HOTSPOT!");
 
             let response = "";
             serial.writeString(command);
@@ -1527,20 +1527,20 @@ namespace 智慧農業 {
                         response2 = readResponse();
 
                         if (response2.includes("OK")) {
-                            //智慧農業.clear()
-                            //智慧農業.writeStringNewLine("WiFi Connected!")
-                            //智慧農業.writeStringNewLine("SSID: " + ssid)
+                            //智慧家居.clear()
+                            //智慧家居.writeStringNewLine("WiFi Connected!")
+                            //智慧家居.writeStringNewLine("SSID: " + ssid)
                             basic.pause(500)
                             isInitialized = true
                             break
                         } else {
-                            //智慧農業.clear()
-                            //智慧農業.writeStringNewLine("Connecting WiFi...")
+                            //智慧家居.clear()
+                            //智慧家居.writeStringNewLine("Connecting WiFi...")
                         }
                     }
 
                 } else {
-                    //智慧農業.writeStringNewLine("WiFi Mode Set ERROR");
+                    //智慧家居.writeStringNewLine("WiFi Mode Set ERROR");
                 }
             }
         } else {
@@ -1557,8 +1557,8 @@ namespace 智慧農業 {
     export function sendMQTT(client: string, name: string, password: string): void {
         if (isInitialized) {
 
-            //智慧農業.clear()
-            //智慧農業.writeStringNewLine("Waiting for upload...");
+            //智慧家居.clear()
+            //智慧家居.writeStringNewLine("Waiting for upload...");
 
             let command1 = `AT+MQTT=1,"mqtt3.thingspeak.com"\r\n`;
             let command2 = `AT+MQTT=2,"1883"\r\n`;
@@ -1580,41 +1580,41 @@ namespace 智慧農業 {
             serial.writeString(command2);
             basic.pause(500);
             response1 = readResponse();
-            //智慧農業.clear();
+            //智慧家居.clear();
 
             serial.writeString(command3);
             basic.pause(500);
-            //智慧農業.clear();
+            //智慧家居.clear();
 
             serial.writeString(command4);
             basic.pause(500);
-            //智慧農業.clear();
+            //智慧家居.clear();
 
             serial.writeString(command5);
             basic.pause(500);
-            //智慧農業.clear();
+            //智慧家居.clear();
 
             serial.writeString(command6);
             basic.pause(500);
-            //智慧農業.clear();
+            //智慧家居.clear();
 
             serial.writeString(command7);
             basic.pause(500);
-            //智慧農業.clear();
+            //智慧家居.clear();
 
             serial.writeString(command8);
             basic.pause(500);
-            //智慧農業.clear();
+            //智慧家居.clear();
 
         } else {
-            //智慧農業.writeStringNewLine("ERROR: Module not initialized!");
+            //智慧家居.writeStringNewLine("ERROR: Module not initialized!");
         }
     }
 
 
     /**
-   * 發送 MQTT 請求
-    */
+    * 發送 MQTT 請求
+     */
     //% expandableArgumentMode="enabled"
     //% block="PUBLISHTOPIC 發布訊息 | Channel ID %topic| field1_data %data||field2_data %data1| field3_data %data2| field4_data %data3| field5_data %data4| field6_data %data5| field7_data %data6| field8_data %data7"
     //% topic.defl=0 data.defl=0 data1.defl=0 data2.defl=0 data3.defl=0 data4.defl=0 data5.defl=0 data6.defl=0 data.defl=0
@@ -1689,25 +1689,6 @@ namespace 智慧農業 {
         }
 
     }
-
-    /**
-    * 接收 MQTT 
-    */
-    //% block="SUBSCRIBE 訂閱 | Channel ID = %host|"
-    /*export function SUBSCRIBE(topic: number = 0): void {
-        if (isInitialized) {
-            // 拼接 AT 指令
-            let topic1 = "channels" + "/" + topic + "/" + "subscribe" + "/" + "fields" + "/" + "field1";
-            let command = "AT+MQTTSUB=" + topic1 + ",1" + "\r\n";
-            serial.writeString(command);
-            basic.pause(1000);
-            let response = ""
-            response = readResponse(); // 讀取回應
-            智慧農業.writeStringNewLine(response);
-        } else {
-            basic.showString("ERROR"); // 顯示錯誤
-        }
-    }*/
 
 
 
